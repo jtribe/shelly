@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/plain_text_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plain Text Share" />
+
+    <Button
+        android:id="@+id/image_and_text_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Image and Text Share" />
+
+    <Button
+        android:id="@+id/video_and_text_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Video and Text Share" />
+
+    <Button
+        android:id="@+id/email_to_one_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email One Person" />
+
+    <Button
+        android:id="@+id/email_to_many_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Many People" />
+</LinearLayout>
