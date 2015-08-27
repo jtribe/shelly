@@ -8,19 +8,12 @@ See the sample project in the `sample/` folder.
 
 ## Installation
 
-Add this into your build.gradle to get the Shelly goodness.
+Add this into your build.gradle to get the Shelly goodness, you'll need to have `jcenter()` in your list of repositories.
 
 ```
-repositories {
-    maven {
-        url "http://dl.bintray.com/jtribe/maven"
-    }
-}
-
 dependencies {
-    compile 'au.com.jtribe.shelly:shelly:0.1'
+    compile 'au.com.jtribe.shelly:shelly:0.1.1'
 }
-
 ```
 
 ### Sharing Generic Information
