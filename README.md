@@ -60,6 +60,16 @@ Shelly.email(context)
   .send();
  ```
 
+ Sending an email with a cc at once:
+ ```java
+Shelly.email(context)
+  .to("angus@jtribe.com", "partyravi@jtribe.com", "markymark@jtribe.com")
+  .cc("toccto@jtribe.com", "anothercc@jtribe.com")
+  .subject("Subject Text")
+  .body("Email Body")
+  .send();
+ ```
+
 ## Issues and Feedback
 Please use [Github Issues](https://github.com/jtribe/shelly/issues "Github Issues") for feature requests or bug reports.
 

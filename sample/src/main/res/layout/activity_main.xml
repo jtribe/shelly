@@ -38,4 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email Many People" />
+
+    <Button
+        android:id="@+id/email_with_cc_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email With CC" />
+
 </LinearLayout>

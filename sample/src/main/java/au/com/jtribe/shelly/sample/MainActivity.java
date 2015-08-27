@@ -64,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
                         .send();
             }
         });
+
+        findViewById(R.id.email_with_cc_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Shelly.email(MainActivity.this)
+                        .to("angus@jtribe.com")
+                        .cc("cc@jtribe.com", "anotherccaddress@jtribe.com")
+                        .subject("Testing Subject Text")
+                        .body("Testing Body Text")
+                        .send();
+            }
+        });
+
     }
 
     @Override

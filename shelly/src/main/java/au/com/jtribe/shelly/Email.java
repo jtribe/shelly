@@ -34,18 +34,27 @@ public final class Email {
     private final Context context;
 
     private final List<String> toList;
+    private final List<String> ccList;
     private String subject;
     private String body;
 
     Email(Context context) {
         this.context = context;
         this.toList = new ArrayList<>(4);   // arbitrary assume people won't be sending toList more than 4 people in most cases.
+        this.ccList = new ArrayList<>();    // In most cases these will probably be empty anyway
     }
 
     public Email to(String... to) {
         if (to == null) throw new IllegalArgumentException("to == null");
 
         this.toList.addAll(Arrays.asList(to));
+        return this;
+    }
+
+    public Email cc(String... cc) {
+        if (cc == null) throw new IllegalArgumentException("cc == null");
+
+        this.ccList.addAll(Arrays.asList(cc));
         return this;
     }
 
@@ -70,6 +79,11 @@ public final class Email {
         if (!this.toList.isEmpty()) {
             String[] toArray = new String[this.toList.size()];
             emailIntent.putExtra(Intent.EXTRA_EMAIL, this.toList.toArray(toArray));
+        }
+
+        if (!this.ccList.isEmpty()) {
+            String[] ccArray = new String[this.ccList.size()];
+            emailIntent.putExtra(Intent.EXTRA_CC, this.ccList.toArray(ccArray));
         }
 
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
