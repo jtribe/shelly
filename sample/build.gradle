@@ -18,8 +18,14 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "http://dl.bintray.com/jtribe/maven"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.0'
-    compile project(':shelly')
+    compile 'au.com.jtribe.shelly:shelly:0.1'
 }

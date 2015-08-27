@@ -14,7 +14,6 @@ import android.net.Uri;
  *      .image(myImageUri)
  *      .send();
  * </code>
- * <p/>
  *
  * To share a video and text:
  *
