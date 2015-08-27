@@ -54,10 +54,7 @@ Shelly.email(context)
  Sending an email to multiple people at once:
  ```java
 Shelly.email(context)
-  .to("angus@jtribe.com")
-  .to("mark@jtribe.com")
-  .to("another@email.com")
-  .to("yetanother@email.com")
+  .to("angus@jtribe.com", "partyravi@jtribe.com", "markymark@jtribe.com")
   .subject("Subject Text")
   .body("Email Body")
   .send();

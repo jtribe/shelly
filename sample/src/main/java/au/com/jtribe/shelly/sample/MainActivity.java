@@ -57,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Shelly.email(MainActivity.this)
-                        .to("angus@jtribe.com")
-                        .to("another@email.com")
-                        .to("blah@blah.com")
+                        .to("angus@jtribe.com", "yetanother@jtribe.com", "another@jtribe.com")
+                        .to("anotheranother@jtribe.com")
                         .subject("Testing Subject Text")
                         .body("Testing Body Text")
                         .send();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,13 +39,13 @@ public final class Email {
 
     Email(Context context) {
         this.context = context;
-        this.toList = new ArrayList<>(4);     // arbitrary assume people won't be sending toList more than 4 people in most cases.
+        this.toList = new ArrayList<>(4);   // arbitrary assume people won't be sending toList more than 4 people in most cases.
     }
 
-    public Email to(String to) {
-        if (to == null) throw new IllegalArgumentException("toList == null");
+    public Email to(String... to) {
+        if (to == null) throw new IllegalArgumentException("to == null");
 
-        this.toList.add(to);
+        this.toList.addAll(Arrays.asList(to));
         return this;
     }
 
@@ -65,8 +66,12 @@ public final class Email {
     public void send() {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType(Mime.EMAIL);
-        String[] toArray = new String[this.toList.size()];
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, this.toList.toArray(toArray));
+
+        if (!this.toList.isEmpty()) {
+            String[] toArray = new String[this.toList.size()];
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, this.toList.toArray(toArray));
+        }
+
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, this.body);
 
