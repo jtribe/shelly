@@ -35,6 +35,7 @@ public final class Email {
 
     private final List<String> toList;
     private final List<String> ccList;
+    private final List<String> bccList;
     private String subject;
     private String body;
 
@@ -42,6 +43,7 @@ public final class Email {
         this.context = context;
         this.toList = new ArrayList<>(4);   // arbitrary assume people won't be sending toList more than 4 people in most cases.
         this.ccList = new ArrayList<>();    // In most cases these will probably be empty anyway
+        this.bccList = new ArrayList<>();
     }
 
     public Email to(String... to) {
@@ -55,6 +57,13 @@ public final class Email {
         if (cc == null) throw new IllegalArgumentException("cc == null");
 
         this.ccList.addAll(Arrays.asList(cc));
+        return this;
+    }
+
+    public Email bcc(String... bc) {
+        if (bc == null) throw new IllegalArgumentException("bc == null");
+
+        this.bccList.addAll(Arrays.asList(bc));
         return this;
     }
 
@@ -84,6 +93,11 @@ public final class Email {
         if (!this.ccList.isEmpty()) {
             String[] ccArray = new String[this.ccList.size()];
             emailIntent.putExtra(Intent.EXTRA_CC, this.ccList.toArray(ccArray));
+        }
+
+        if (!this.bccList.isEmpty()) {
+            String[] bccArray = new String[this.bccList.size()];
+            emailIntent.putExtra(Intent.EXTRA_BCC, this.bccList.toArray(bccArray));
         }
 
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);

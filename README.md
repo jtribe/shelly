@@ -60,11 +60,21 @@ Shelly.email(context)
   .send();
  ```
 
- Sending an email with a cc at once:
+ Sending an email with a cc:
  ```java
 Shelly.email(context)
   .to("angus@jtribe.com", "partyravi@jtribe.com", "markymark@jtribe.com")
   .cc("toccto@jtribe.com", "anothercc@jtribe.com")
+  .subject("Subject Text")
+  .body("Email Body")
+  .send();
+ ```
+
+ Sending an email with a bcc:
+ ```java
+Shelly.email(context)
+  .to("angus@jtribe.com", "partyravi@jtribe.com", "markymark@jtribe.com")
+  .bcc("toccto@jtribe.com", "anothercc@jtribe.com")
   .subject("Subject Text")
   .body("Email Body")
   .send();

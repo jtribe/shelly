@@ -77,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.email_with_bcc_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Shelly.email(MainActivity.this)
+                        .to("angus@jtribe.com")
+                        .cc("cc@jtribe.com", "anotherccaddress@jtribe.com")
+                        .bcc("bcc@jtribe.com", "anotherbcc@jtribe.com")
+                        .subject("Testing Subject Text")
+                        .body("Testing Body Text")
+                        .send();
+            }
+        });
     }
 
     @Override
