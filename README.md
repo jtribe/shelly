@@ -64,7 +64,7 @@ Shelly.email(context)
  ```
 
 ## Issues and Feedback
-Please use Github issues for feature requests or bug reports (https://github.com/jtribe/shelly/issues "Github Issues").
+Please use Github issues for feature requests or bug reports [Github Issues](https://github.com/jtribe/shelly/issues "Github Issues").
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
