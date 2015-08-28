@@ -26,7 +26,6 @@ import android.net.Uri;
  */
 public final class SocialShare {
     private Context context;
-    private String subject;
     private String text;
     private Uri uri;
     private String mimeType;
@@ -40,13 +39,6 @@ public final class SocialShare {
         if (text == null) throw new IllegalArgumentException("text == null");
 
         this.text = text;
-        return this;
-    }
-
-    public SocialShare subject(String subject) {
-        if (subject == null) throw new IllegalArgumentException("subject == null");
-
-        this.subject = subject;
         return this;
     }
 
@@ -75,10 +67,6 @@ public final class SocialShare {
 
         if (this.uri != null) {
             shareIntent.putExtra(Intent.EXTRA_STREAM, this.uri);
-        }
-
-        if (this.subject != null) {
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
         }
 
         this.context.startActivity(shareIntent);
