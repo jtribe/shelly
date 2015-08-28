@@ -32,7 +32,7 @@ def issueUrl = 'https://github.com/jtribe/shelly/issues'
 def gitUrl = 'https://github.com/jtribe/shelly.git'
 
 group = 'au.com.jtribe.shelly'
-version = '0.1'
+version = '0.1.1'
 
 bintray {
     Properties properties = new Properties()
