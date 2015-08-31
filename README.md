@@ -12,11 +12,19 @@ Add this into your build.gradle to get the Shelly goodness, you'll need to have 
 
 ```
 dependencies {
-    compile 'au.com.jtribe.shelly:shelly:0.1.1'
+    compile 'au.com.jtribe.shelly:shelly:0.1.3'
 }
 ```
 
 ### Sharing Generic Information
+
+Sharing some text and a url, the url is appended onto the text such that this shares "text with url http://www.jtribe.com.au":
+```java
+Shelly.share(context)
+  .text("text with url")
+  .url("http://www.jtribe.com.au")
+  .send();
+```
 
 Sharing some text and an image:
 ```java
