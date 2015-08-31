@@ -1,7 +1,7 @@
 package au.com.jtribe.shelly;
 
 /**
- * Created by angus on 26/08/2015.
+ * List of Mime types that can be used for intent types.
  */
 final class Mime {
     public static final String ANY_IMAGE = "image/*";
