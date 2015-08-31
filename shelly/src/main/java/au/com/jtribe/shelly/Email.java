@@ -2,33 +2,14 @@ package au.com.jtribe.shelly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * To send an email to one person
- *
- * <code>
- *  Shelly.email(context)
- *      .to("angus@jtribe.com")
- *      .subject("Hello")
- *      .text("Talk about how cool I am")
- *      .send();
- * </code>
- *
- * To send an email to multiple people
- * <code>
- *  Shelly.email(context)
- *      .to("angus@jtribe.com")
- *      .to("mark@jtribe.com")
- *      .to("another@email.com")
- *      .to("yetanother@email.com")
- *      .subject("Hello")
- *      .text("Talk about how cool I am")
- *      .send();
- * </code>
+ * Represents an email to a person or group of people.
  */
 public final class Email {
     private final Context context;
@@ -46,6 +27,12 @@ public final class Email {
         this.bccList = new ArrayList<>();
     }
 
+    /**
+     * Adds email addresses that the email should be sent to. Email addresses will be added into the To field.
+     *
+     * @param to Urls that the email should be sent to.
+     * @return Object this method was called on for method chaining.
+     */
     public Email to(String... to) {
         if (to == null) throw new IllegalArgumentException("to == null");
 
@@ -53,6 +40,12 @@ public final class Email {
         return this;
     }
 
+    /**
+     * Adds email addresses that the email should be sent to. Email addresses will be added to the CC field.
+     *
+     * @param cc Urls that the email should be cced to.
+     * @return Object this method was called on for method chaining.
+     */
     public Email cc(String... cc) {
         if (cc == null) throw new IllegalArgumentException("cc == null");
 
@@ -60,13 +53,25 @@ public final class Email {
         return this;
     }
 
-    public Email bcc(String... bc) {
-        if (bc == null) throw new IllegalArgumentException("bc == null");
+    /**
+     * Adds email addresses that the email should be sent to. Email addresses will be added to the bcc field.
+     *
+     * @param bcc Urls that the email should be bcced to.
+     * @return Object this method was called on for method chaining.
+     */
+    public Email bcc(String... bcc) {
+        if (bcc == null) throw new IllegalArgumentException("bc == null");
 
-        this.bccList.addAll(Arrays.asList(bc));
+        this.bccList.addAll(Arrays.asList(bcc));
         return this;
     }
 
+    /**
+     * Adds subject to the email.
+     *
+     * @param subject Subject of the email
+     * @return Object this method was called on for method chaining.
+     */
     public Email subject(String subject) {
         if (subject == null) throw new IllegalArgumentException("subject == null");
 
@@ -74,6 +79,12 @@ public final class Email {
         return this;
     }
 
+    /**
+     * Adds a body to the email.
+     *
+     * @param body Body of the email.
+     * @return Object this method was called on for method chaining.
+     */
     public Email body(String body) {
         if (body == null) throw new IllegalArgumentException("body == null");
 
@@ -81,6 +92,9 @@ public final class Email {
         return this;
     }
 
+    /**
+     * Starts an activity to send an email with the configured details.
+     */
     public void send() {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType(Mime.EMAIL);
@@ -102,6 +116,13 @@ public final class Email {
 
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, this.body);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        } else {
+            //noinspection deprecation
+            emailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        }
 
         this.context.startActivity(emailIntent);
     }
