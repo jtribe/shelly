@@ -3,6 +3,7 @@ package au.com.jtribe.shelly;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 
 /**
  * Represents a basic share of text, image, or video.
@@ -71,6 +72,13 @@ public final class SocialShare {
 
         if (this.uri != null) {
             shareIntent.putExtra(Intent.EXTRA_STREAM, this.uri);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        } else {
+            //noinspection deprecation
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         }
 
         this.context.startActivity(shareIntent);
