@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 case VIDEO_REQUEST_CODE:
                     Shelly.share(MainActivity.this)
                             .text("Testing Video Text")
-                            .subject("My Video Subject")
                             .video(data.getData())
                             .send();
                     break;
