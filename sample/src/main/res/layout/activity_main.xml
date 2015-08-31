@@ -16,6 +16,18 @@
         android:text="Plain Text Share" />
 
     <Button
+        android:id="@+id/plain_text_and_url_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plain Text With URL Share" />
+
+    <Button
+        android:id="@+id/plain_text_and_many_urls_share_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plain Text With Many URLs Share" />
+
+    <Button
         android:id="@+id/image_and_text_share_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

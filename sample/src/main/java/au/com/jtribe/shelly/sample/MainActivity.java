@@ -27,6 +27,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.plain_text_and_url_share_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Shelly.share(MainActivity.this)
+                        .text("Testing Link Text")
+                        .url("http://www.jtribe.com.au")
+                        .send();
+            }
+        });
+
+        findViewById(R.id.plain_text_and_many_urls_share_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Shelly.share(MainActivity.this)
+                        .text("Testing Link Text")
+                        .url("http://www.jtribe.com.au", "http://www.another.url.com")
+                        .send();
+            }
+        });
+
         findViewById(R.id.image_and_text_share_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
