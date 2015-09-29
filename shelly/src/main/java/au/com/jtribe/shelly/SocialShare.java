@@ -92,7 +92,7 @@ public final class SocialShare {
     /**
      * Starts an activity to share with the configured details.
      */
-    public void send() {
+    public boolean send() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType(this.mimeType);
 
@@ -110,7 +110,12 @@ public final class SocialShare {
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         }
 
-        this.context.startActivity(shareIntent);
+        if (shareIntent.resolveActivity(this.context.getPackageManager()) != null) {
+            this.context.startActivity(shareIntent);
+            return true;
+        }
+
+        return false;
     }
 
     private String buildText() {

@@ -2,6 +2,7 @@ package au.com.jtribe.shelly;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 
 import java.util.ArrayList;
@@ -95,9 +96,10 @@ public final class Email {
     /**
      * Starts an activity to send an email with the configured details.
      */
-    public void send() {
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+    public boolean send() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setType(Mime.EMAIL);
+        emailIntent.setData(Uri.parse("mailto:"));
 
         if (!this.toList.isEmpty()) {
             String[] toArray = new String[this.toList.size()];
@@ -114,6 +116,7 @@ public final class Email {
             emailIntent.putExtra(Intent.EXTRA_BCC, this.bccList.toArray(bccArray));
         }
 
+
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
         emailIntent.putExtra(Intent.EXTRA_TEXT, this.body);
 
@@ -124,6 +127,11 @@ public final class Email {
             emailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         }
 
-        this.context.startActivity(emailIntent);
+        if (emailIntent.resolveActivity(this.context.getPackageManager()) != null) {
+            this.context.startActivity(emailIntent);
+            return true;
+        }
+
+        return false;
     }
 }
