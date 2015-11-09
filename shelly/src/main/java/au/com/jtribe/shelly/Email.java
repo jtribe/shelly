@@ -95,6 +95,8 @@ public final class Email {
 
     /**
      * Starts an activity to send an email with the configured details.
+     *
+     * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
      */
     public boolean send() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);

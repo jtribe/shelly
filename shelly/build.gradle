@@ -32,7 +32,7 @@ def issueUrl = 'https://github.com/jtribe/shelly/issues'
 def gitUrl = 'https://github.com/jtribe/shelly.git'
 
 group = 'au.com.jtribe.shelly'
-version = '0.1.3'
+version = '0.1.6'
 
 bintray {
     Properties properties = new Properties()
@@ -59,7 +59,7 @@ install {
     repositories.mavenInstaller {
         pom {
             project {
-                packaging 'aar'
+                packaging 'jar'
                 name 'Shelly'
                 url siteUrl
                 licenses {

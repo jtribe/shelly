@@ -13,11 +13,11 @@ import java.util.List;
  * Represents a basic share of text, image, or video.
  */
 public final class SocialShare {
-    private Context context;
+    private final Context context;
     private String text;
     private Uri uri;
     private String mimeType;
-    private List<String> urlList;
+    private final List<String> urlList;
 
     SocialShare(Context context) {
         this.context = context;
@@ -91,6 +91,8 @@ public final class SocialShare {
 
     /**
      * Starts an activity to share with the configured details.
+     *
+     * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
      */
     public boolean send() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
