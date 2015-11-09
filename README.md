@@ -1,7 +1,7 @@
 # Shelly
-Simple sharing for Android.
+Fluent API for common Intent use-cases in Android.
 
-This library wraps sharing intents with a clean and simple to understand interface for a number of specific use-cases.
+This library wraps Intents with a clean and simple to understand interface for a number of specific use-cases.
 
 ## Sample usage
 See the sample project in the `sample/` folder.
@@ -12,7 +12,7 @@ Add this into your build.gradle to get the Shelly goodness, you'll need to have 
 
 ```
 dependencies {
-    compile 'au.com.jtribe.shelly:shelly:0.1.3'
+    compile 'au.com.jtribe.shelly:shelly:0.1.6@aar'
 }
 ```
 
