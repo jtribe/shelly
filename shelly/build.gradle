@@ -32,7 +32,7 @@ def issueUrl = 'https://github.com/jtribe/shelly/issues'
 def gitUrl = 'https://github.com/jtribe/shelly.git'
 
 group = 'au.com.jtribe.shelly'
-version = '0.1.6'
+version = '0.1.7'
 
 bintray {
     Properties properties = new Properties()
@@ -107,4 +107,7 @@ artifacts {
 
 task findConventions << {
     println project.getConvention()
+}
+dependencies {
+    compile 'com.android.support:support-annotations:23.0.0'
 }

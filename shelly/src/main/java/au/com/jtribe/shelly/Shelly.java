@@ -32,4 +32,15 @@ public final class Shelly {
         if (context == null) throw new IllegalArgumentException("context == null");
         return new Email(context);
     }
+
+    /**
+     * Begins composing a phone call.
+     *
+     * @param context Context to create the phone Intent with.
+     * @return Phone that can be used to start a phone call.
+     */
+    public static Phone phone(Context context) {
+        if (context == null) throw new IllegalArgumentException("context == null");
+        return new Phone(context);
+    }
 }
