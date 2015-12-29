@@ -10,7 +10,7 @@ See the sample project in the `sample/` folder.
 
 Add this into your build.gradle to get the Shelly goodness, you'll need to have `jcenter()` in your list of repositories.
 
-```
+```groovy
 dependencies {
     compile 'au.com.jtribe.shelly:shelly:0.1.6@aar'
 }
