@@ -129,7 +129,7 @@ public final class Email {
         }
 
         if (emailIntent.resolveActivity(this.context.getPackageManager()) != null) {
-            this.context.startActivity(emailIntent);
+            this.context.startActivity(Intent.createChooser(emailIntent,"Share email via:"));
             return true;
         }
 
