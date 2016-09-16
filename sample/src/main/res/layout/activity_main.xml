@@ -62,4 +62,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email With BCC" />
+
+    <Button
+        android:id="@+id/phone_dial_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone dial number" />
+
+    <Button
+        android:id="@+id/phone_call_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone call number" />
 </LinearLayout>
