@@ -94,46 +94,55 @@ public final class Email {
     }
 
     /**
-     * Starts an activity to send an email with the configured details.
+     * Creates an email intent with the configured details
+     * @return Intent configured with this object's fields
+     */
+    public Intent intent()
+      {
+          Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+          emailIntent.setType(Mime.EMAIL);
+          emailIntent.setData(Uri.parse("mailto:"));
+
+          if (!this.toList.isEmpty()) {
+              String[] toArray = new String[this.toList.size()];
+              emailIntent.putExtra(Intent.EXTRA_EMAIL, this.toList.toArray(toArray));
+          }
+
+          if (!this.ccList.isEmpty()) {
+              String[] ccArray = new String[this.ccList.size()];
+              emailIntent.putExtra(Intent.EXTRA_CC, this.ccList.toArray(ccArray));
+          }
+
+          if (!this.bccList.isEmpty()) {
+              String[] bccArray = new String[this.bccList.size()];
+              emailIntent.putExtra(Intent.EXTRA_BCC, this.bccList.toArray(bccArray));
+          }
+
+          emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
+          emailIntent.putExtra(Intent.EXTRA_TEXT, this.body);
+
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+              emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+          } else {
+              //noinspection deprecation
+              emailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+          }
+
+          return emailIntent;
+      }
+
+    /**
+     * Gets the email intent with the configured details.
+     * Starts a activity using intent chooser
      *
      * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
      */
     public boolean send() {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setType(Mime.EMAIL);
-        emailIntent.setData(Uri.parse("mailto:"));
-
-        if (!this.toList.isEmpty()) {
-            String[] toArray = new String[this.toList.size()];
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, this.toList.toArray(toArray));
-        }
-
-        if (!this.ccList.isEmpty()) {
-            String[] ccArray = new String[this.ccList.size()];
-            emailIntent.putExtra(Intent.EXTRA_CC, this.ccList.toArray(ccArray));
-        }
-
-        if (!this.bccList.isEmpty()) {
-            String[] bccArray = new String[this.bccList.size()];
-            emailIntent.putExtra(Intent.EXTRA_BCC, this.bccList.toArray(bccArray));
-        }
-
-
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, this.subject);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, this.body);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        } else {
-            //noinspection deprecation
-            emailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        }
-
+        Intent emailIntent = intent();
         if (emailIntent.resolveActivity(this.context.getPackageManager()) != null) {
             this.context.startActivity(emailIntent);
             return true;
         }
-
         return false;
     }
 }

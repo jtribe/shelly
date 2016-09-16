@@ -90,14 +90,13 @@ public final class SocialShare {
     }
 
     /**
-     * Starts an activity to share with the configured details.
-     *
-     * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
+     * Creates a social share intent with the configured details
+     * @return Intent configured with this object's fields
      */
-    public boolean send() {
+    public Intent intent()
+    {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType(this.mimeType);
-
 
         shareIntent.putExtra(Intent.EXTRA_TEXT, buildText());
 
@@ -111,12 +110,21 @@ public final class SocialShare {
             //noinspection deprecation
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         }
+        return shareIntent;
+    }
+
+    /**
+     * Gets the share intent with the configured details.
+     * Starts a activity using intent chooser
+     * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
+     */
+    public boolean send() {
+        Intent shareIntent = intent();
 
         if (shareIntent.resolveActivity(this.context.getPackageManager()) != null) {
             this.context.startActivity(shareIntent);
             return true;
         }
-
         return false;
     }
 
