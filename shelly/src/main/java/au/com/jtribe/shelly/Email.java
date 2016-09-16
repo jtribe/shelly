@@ -99,9 +99,8 @@ public final class Email {
      * @return Boolean true if there is an activity to handle the Intent and it was started, false otherwise.
      */
     public boolean send() {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType(Mime.EMAIL);
-        emailIntent.setData(Uri.parse("mailto:"));
 
         if (!this.toList.isEmpty()) {
             String[] toArray = new String[this.toList.size()];
