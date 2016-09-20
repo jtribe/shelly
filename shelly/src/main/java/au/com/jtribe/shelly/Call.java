@@ -61,8 +61,8 @@ public final class Call {
    * Creates a chooser intent that will call the phone number provided, the chooser will have no
    * specified title.
    *
-   * <b>Note: This may not be an appropriate user experience, since there is most likely a default app
-   * configured by the user.</b>
+   * <b>Note: This may not be an appropriate user experience, since there is most likely a default
+   * app configured by the user.</b>
    */
   @NonNull
   @CheckResult
@@ -71,10 +71,11 @@ public final class Call {
   }
 
   /**
-   * Creates an ACTION_CALL chooser intent with this object's fields as data in the intent
+   * Creates and returns an Intent that will display a chooser to the user with the specified
+   * title, allowing them to pick an app to call with.
    *
-   * <b>Note: This may not be an appropriate user experience, since there is most likely a default app
-   * configured by the user.</b>
+   * <b>Note: This may not be an appropriate user experience, since there is most likely a default
+   * app configured by the user.</b>
    *
    * @param prompt The chooser's title is set by prompt
    */
