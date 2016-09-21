@@ -37,7 +37,7 @@ version = '0.1.6'
 
 bintray {
     Properties properties = new Properties()
-    //properties.load(project.rootProject.file('bintray.properties').newDataInputStream())
+    properties.load(project.rootProject.file('bintray.properties').newDataInputStream())
 
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
