@@ -16,7 +16,7 @@ public final class Dial {
 
   private String phoneNumber;
 
-  public Dial() {
+  Dial() {
   }
 
   /**
