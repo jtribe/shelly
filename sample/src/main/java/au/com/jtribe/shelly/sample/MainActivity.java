@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent intent = Shelly.email()
-            .to("mitch@jtribe.com.au")
+            .to("example@jtribe.com")
             .subject("Testing Subject Text")
             .body("Testing Body Text")
             .asChooserIntent();
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent intent = Shelly.email()
-            .to("mitch@jtribe.com.au", "yetanother@jtribe.com", "another@jtribe.com")
+            .to("example@jtribe.com", "yetanother@jtribe.com", "another@jtribe.com")
             .to("anotheranother@jtribe.com")
             .subject("Testing Subject Text")
             .body("Testing Body Text")
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent intent = Shelly.email()
-            .to("mitch@jtribe.com.au")
+            .to("example@jtribe.com")
             .cc("cc@jtribe.com", "anotherccaddress@jtribe.com")
             .subject("Testing Subject Text")
             .body("Testing Body Text")
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent intent = Shelly.email()
-            .to("mitch@jtribe.com.au")
+            .to("example@jtribe.com")
             .cc("cc@jtribe.com", "anotherccaddress@jtribe.com")
             .bcc("bcc@jtribe.com", "anotherbcc@jtribe.com")
             .subject("Testing Subject Text")
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     findViewById(R.id.phone_dial_button).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = Shelly.dial().number("61406650430").asChooserIntent();
+        Intent intent = Shelly.dial().number("123456789").asChooserIntent();
         startActivity(intent);
       }
     });
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
   @RequiresPermission(Manifest.permission.CALL_PHONE)
   private void shellyCall() {
-    Intent intent = Shelly.call().number("61406650430").asChooserIntent();
+    Intent intent = Shelly.call().number("123456789").asChooserIntent();
     startActivity(intent);
   }
 
