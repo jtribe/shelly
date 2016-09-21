@@ -3,15 +3,17 @@ package au.com.jtribe.shelly;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
 
 /**
  * Represents a phone dial to a number using Intent.ACTION_DIAL
  */
-public class Dial {
+public final class Dial {
 
   private String phoneNumber;
 
-  public Dial() {
+  Dial() {
   }
 
   /**
@@ -20,7 +22,9 @@ public class Dial {
    * @param number Phone number that will be dialed
    * @return Dial object this method was called on for method chaining.
    */
-  public Dial number(String number) {
+  @CheckResult
+  @NonNull
+  public Dial number(@NonNull String number) {
     if (number == null) {
       throw new IllegalArgumentException("number == null");
     }
@@ -34,6 +38,8 @@ public class Dial {
    * @return The intent storing this objects data, can be used to open apps capable of placing
    * phone calls
    */
+  @CheckResult
+  @NonNull
   public Intent asIntent() {
     Intent phoneIntent;
     if (phoneNumber != null) {
@@ -57,6 +63,8 @@ public class Dial {
    * Creates an ACTION_DIAL chooser intent with this object's fields as data in the intent
    * The chooser has no title
    */
+  @CheckResult
+  @NonNull
   public Intent asChooserIntent() {
     return Intent.createChooser(asIntent(), null);
   }
@@ -66,7 +74,9 @@ public class Dial {
    *
    * @param prompt The chooser's title is set by prompt
    */
-  public Intent asChooserIntent(CharSequence prompt) {
+  @CheckResult
+  @NonNull
+  public Intent asChooserIntent(@NonNull CharSequence prompt) {
     return Intent.createChooser(asIntent(), prompt);
   }
 }

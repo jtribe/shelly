@@ -3,6 +3,8 @@ package au.com.jtribe.shelly;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,8 @@ public final class Email {
    * @param to Urls that the email should be sent to.
    * @return Object this method was called on for method chaining.
    */
+  @CheckResult
+  @NonNull
   public Email to(String... to) {
     if (to == null) {
       throw new IllegalArgumentException("to == null");
@@ -109,6 +113,8 @@ public final class Email {
    *
    * @return The intent storing this objects data, can be used to open an email client
    */
+  @CheckResult
+  @NonNull
   public Intent asIntent() {
     Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
     //emailIntent.setType(Mime.EMAIL);  //Doesn't seem to be needed with SENDTO and setData mailto:
@@ -148,6 +154,8 @@ public final class Email {
    * @return The intent storing this object's data, can be used to open apps capable of sending
    * emails
    */
+  @CheckResult
+  @NonNull
   public Intent asChooserIntent() {
     return Intent.createChooser(asIntent(), null);
   }
@@ -157,7 +165,9 @@ public final class Email {
    *
    * @param prompt The chooser's title is set by prompt
    */
-  public Intent asChooserIntent(CharSequence prompt) {
+  @CheckResult
+  @NonNull
+  public Intent asChooserIntent(@NonNull CharSequence prompt) {
     return Intent.createChooser(asIntent(), prompt);
   }
 }

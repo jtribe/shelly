@@ -4,16 +4,18 @@ import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 
 /**
  * Represents a phone call to a number using Intent.ACTION_CALL
  */
-public class Call {
+public final class Call {
 
   private String phoneNumber;
 
-  public Call() {
+  Call() {
   }
 
   /**
@@ -22,8 +24,11 @@ public class Call {
    * @param number Phone number that will be called
    * @return Call object this method was called on for method chaining
    */
+
+  @CheckResult
+  @NonNull
   @RequiresPermission(Manifest.permission.CALL_PHONE)
-  public Call number(String number) {
+  public Call number(@NonNull String number) {
     if (number == null) {
       throw new IllegalArgumentException("number == null");
     }
@@ -37,6 +42,8 @@ public class Call {
    * @return The intent storing this objects data, can be used to open apps capable of placing
    * phone calls
    */
+  @CheckResult
+  @NonNull
   public Intent asIntent() {
     Intent phoneIntent;
     if (phoneNumber != null) {
@@ -60,6 +67,8 @@ public class Call {
    * Creates an ACTION_CALL chooser intent with this object's fields as data in the intent
    * The chooser has no title
    */
+  @CheckResult
+  @NonNull
   public Intent asChooserIntent() {
     return Intent.createChooser(asIntent(), null);
   }
@@ -69,7 +78,9 @@ public class Call {
    *
    * @param prompt The chooser's title is set by prompt
    */
-  public Intent asChooserIntent(CharSequence prompt) {
+  @CheckResult
+  @NonNull
+  public Intent asChooserIntent(@NonNull CharSequence prompt) {
     return Intent.createChooser(asIntent(), prompt);
   }
 }
