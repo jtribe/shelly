@@ -12,7 +12,7 @@ test:
     override:
         - ./gradlew test
     post:
-        - find app/build -name 'TEST-*.xml' -exec cp '{}' $CIRCLE_TEST_REPORTS \;
+        - find shelly/build -name 'TEST-*.xml' -exec cp '{}' $CIRCLE_TEST_REPORTS \;
 general:
   artifacts:
     - shelly/build/outputs
