@@ -1,5 +1,8 @@
 package au.com.jtribe.shelly;
 
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
+
 /**
  * Shelly is a factory that creates instances of SocialShare's
  */
@@ -14,6 +17,8 @@ public final class Shelly {
    *
    * @return SocialShare that can be used to perform a social share.
    */
+  @NonNull
+  @CheckResult
   public static SocialShare share() {
     return new SocialShare();
   }
@@ -23,6 +28,8 @@ public final class Shelly {
    *
    * @return Email that can be configured and displayed to the user.
    */
+  @NonNull
+  @CheckResult
   public static Email email() {
     return new Email();
   }
@@ -32,6 +39,8 @@ public final class Shelly {
    *
    * @return Dial that can be used to automatically dial a phone number
    */
+  @NonNull
+  @CheckResult
   public static Dial dial() {
     return new Dial();
   }
@@ -41,6 +50,8 @@ public final class Shelly {
    *
    * @return Call that can be used to automatically call a phone number
    */
+  @NonNull
+  @CheckResult
   public static Call call() {
     return new Call();
   }

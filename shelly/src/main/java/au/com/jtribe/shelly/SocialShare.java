@@ -1,8 +1,6 @@
 package au.com.jtribe.shelly;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.CheckResult;
@@ -11,6 +9,8 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
 /**
  * Represents a basic share of text, image, or video.
@@ -32,11 +32,10 @@ public final class SocialShare {
    * @param text Text to share.
    * @return Object this method was called on for method chaining.
    */
-  public SocialShare text(String text) {
-    if (text == null) {
-      throw new IllegalArgumentException("text == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public SocialShare text(@NonNull String text) {
+    checkNotNull(text, "text == null");
     this.text = text;
     return this;
   }
@@ -55,11 +54,10 @@ public final class SocialShare {
    * @param url Url to share.
    * @return Object this method was called on for method chaining.
    */
-  public SocialShare url(String... url) {
-    if (url == null) {
-      throw new IllegalArgumentException("url == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public SocialShare url(@NonNull String... url) {
+    checkNotNull(url, "url == null");
     this.urlList.addAll(Arrays.asList(url));
     return this;
   }
@@ -71,10 +69,11 @@ public final class SocialShare {
    * @param imageUri Uri that represents an image
    * @return Object this method was called on for method chaining.
    */
-  public SocialShare image(Uri imageUri) {
-    if (imageUri == null) {
-      throw new IllegalArgumentException("imageUri == null");
-    }
+  @NonNull
+  @CheckResult
+  public SocialShare image(@NonNull Uri imageUri) {
+    checkNotNull(imageUri, "imageUri == null");
+
     if (this.uri != null) {
       throw new IllegalStateException("Not allowed multiple uri's");
     }
@@ -91,10 +90,11 @@ public final class SocialShare {
    * @param videoUri Uri that represents a video
    * @return Object this method was called on for method chaining.
    */
-  public SocialShare video(Uri videoUri) {
-    if (videoUri == null) {
-      throw new IllegalArgumentException("videoUri == null");
-    }
+  @NonNull
+  @CheckResult
+  public SocialShare video(@NonNull Uri videoUri) {
+    checkNotNull(videoUri, "videoUri == null");
+
     if (this.uri != null) {
       throw new IllegalStateException("Not allowed multiple uri's");
     }
@@ -128,18 +128,13 @@ public final class SocialShare {
   @NonNull
   @CheckResult
   public Intent asChooserIntent() {
-    return Intent.createChooser(asIntent(), null);
+    return asChooserIntent(null);
   }
 
   @NonNull
   @CheckResult
   public Intent asChooserIntent(@Nullable CharSequence prompt) {
     return Intent.createChooser(asIntent(), prompt);
-  }
-
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
-  public Intent asChooserIntent(CharSequence prompt, IntentSender callback) {
-    return Intent.createChooser(asIntent(), prompt, callback);
   }
 
   private String buildText() {

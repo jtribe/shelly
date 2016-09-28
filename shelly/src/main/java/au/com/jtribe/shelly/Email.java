@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static au.com.jtribe.shelly.Preconditions.checkNotNull;
+
 /**
  * Represents an email to a person or group of people.
  */
@@ -22,9 +24,10 @@ public final class Email {
   private String body;
 
   Email() {
-    this.toList = new ArrayList<>(
-        4);   // arbitrary assume people won't be sending toList more than 4 people in most cases.
-    this.ccList = new ArrayList<>();    // In most cases these will probably be empty anyway
+    // arbitrary assume people won't be sending toList more than 4 people in most cases.
+    this.toList = new ArrayList<>(4);
+    // In most cases these will probably be empty anyway
+    this.ccList = new ArrayList<>();
     this.bccList = new ArrayList<>();
   }
 
@@ -35,11 +38,10 @@ public final class Email {
    * @param to Urls that the email should be sent to.
    * @return Object this method was called on for method chaining.
    */
-  public Email to(String... to) {
-    if (to == null) {
-      throw new IllegalArgumentException("to == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public Email to(@NonNull String... to) {
+    checkNotNull(to, "to == null");
     this.toList.addAll(Arrays.asList(to));
     return this;
   }
@@ -51,11 +53,10 @@ public final class Email {
    * @param cc Urls that the email should be cced to.
    * @return Object this method was called on for method chaining.
    */
+  @NonNull
+  @CheckResult
   public Email cc(String... cc) {
-    if (cc == null) {
-      throw new IllegalArgumentException("cc == null");
-    }
-
+    checkNotNull(cc, "cc == null");
     this.ccList.addAll(Arrays.asList(cc));
     return this;
   }
@@ -68,11 +69,10 @@ public final class Email {
    * @param bcc Urls that the email should be bcced to.
    * @return Object this method was called on for method chaining.
    */
-  public Email bcc(String... bcc) {
-    if (bcc == null) {
-      throw new IllegalArgumentException("bc == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public Email bcc(@NonNull String... bcc) {
+    checkNotNull(bcc, "bcc == null");
     this.bccList.addAll(Arrays.asList(bcc));
     return this;
   }
@@ -83,11 +83,10 @@ public final class Email {
    * @param subject Subject of the email
    * @return Object this method was called on for method chaining.
    */
-  public Email subject(String subject) {
-    if (subject == null) {
-      throw new IllegalArgumentException("subject == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public Email subject(@NonNull String subject) {
+    checkNotNull(subject, "subject == null");
     this.subject = subject;
     return this;
   }
@@ -98,11 +97,10 @@ public final class Email {
    * @param body Body of the email.
    * @return Object this method was called on for method chaining.
    */
-  public Email body(String body) {
-    if (body == null) {
-      throw new IllegalArgumentException("body == null");
-    }
-
+  @NonNull
+  @CheckResult
+  public Email body(@NonNull String body) {
+    checkNotNull(body, "body == null");
     this.body = body;
     return this;
   }
@@ -116,7 +114,6 @@ public final class Email {
   @CheckResult
   public Intent asIntent() {
     Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-    //emailIntent.setType(Mime.EMAIL);  //Doesn't seem to be needed with SENDTO and setData mailto:
     emailIntent.setData(Uri.parse("mailto:"));
 
     if (!this.toList.isEmpty()) {
@@ -156,7 +153,7 @@ public final class Email {
   @NonNull
   @CheckResult
   public Intent asChooserIntent() {
-    return Intent.createChooser(asIntent(), null);
+    return asChooserIntent(null);
   }
 
   /**
