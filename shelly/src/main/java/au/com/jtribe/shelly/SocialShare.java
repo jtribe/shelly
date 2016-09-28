@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -101,6 +104,8 @@ public final class SocialShare {
     return this;
   }
 
+  @NonNull
+  @CheckResult
   public Intent asIntent() {
     Intent shareIntent = new Intent(Intent.ACTION_SEND);
     shareIntent.setType(this.mimeType);
@@ -120,11 +125,15 @@ public final class SocialShare {
     return shareIntent;
   }
 
+  @NonNull
+  @CheckResult
   public Intent asChooserIntent() {
     return Intent.createChooser(asIntent(), null);
   }
 
-  public Intent asChooserIntent(CharSequence prompt) {
+  @NonNull
+  @CheckResult
+  public Intent asChooserIntent(@Nullable CharSequence prompt) {
     return Intent.createChooser(asIntent(), prompt);
   }
 
