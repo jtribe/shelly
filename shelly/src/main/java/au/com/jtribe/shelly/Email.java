@@ -63,8 +63,7 @@ public final class Email {
 
   /**
    * Adds email addresses that the email should be sent to. Email addresses will be added to the
-   * bcc
-   * field.
+   * bcc field.
    *
    * @param bcc Urls that the email should be bcced to.
    * @return Object this method was called on for method chaining.
@@ -106,9 +105,11 @@ public final class Email {
   }
 
   /**
-   * Creates an ACTION_SENDTO intent adding this object's fields into the intent
+   * Creates and returns an intent that will allow the user to send an email using the
+   * configuration
+   * provided.
    *
-   * @return The intent storing this objects data, can be used to open an email client
+   * @return The intent that can be used to open an email client
    */
   @NonNull
   @CheckResult
@@ -144,11 +145,14 @@ public final class Email {
   }
 
   /**
-   * Creates an ACTION_SENDTO chooser intent adding this object's fields into the intent
-   * The chooser has no title
+   * Creates and returns an intent that will allow the user to send an email using the
+   * configuration
+   * provided.
    *
-   * @return The intent storing this object's data, can be used to open apps capable of sending
-   * emails
+   * <b>Note: Since most users will have a preferred email client this may not be the appropriate
+   * behaviour</b>
+   *
+   * @return The intent that can be used to open a chooser to select an email client
    */
   @NonNull
   @CheckResult
@@ -157,9 +161,14 @@ public final class Email {
   }
 
   /**
-   * Creates an ACTION_SENDTO chooser intent with this object's fields as data in the intent
+   * Creates and returns an intent that will allow the user to send an email using the
+   * configuration
+   * provided.
    *
-   * @param prompt The chooser's title is set by prompt
+   * <b>Note: Since most users will have a preferred email client this may not be the appropriate
+   * behaviour</b>
+   *
+   * @return The intent that can be used to open a chooser to select an email client
    */
   @NonNull
   @CheckResult

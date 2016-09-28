@@ -104,6 +104,12 @@ public final class SocialShare {
     return this;
   }
 
+  /**
+   * Creates and returns an Intent that will allow the user to share content.
+   *
+   * <b>Note: This may not be an appropriate user experience, since the user may not be able to
+   * choose their preferred share app</b>
+   */
   @NonNull
   @CheckResult
   public Intent asIntent() {
@@ -125,12 +131,22 @@ public final class SocialShare {
     return shareIntent;
   }
 
+  /**
+   * Creates and returns an Intent that will display a chooser to the user, allowing them to pick an
+   * app to share with.
+   */
   @NonNull
   @CheckResult
   public Intent asChooserIntent() {
     return asChooserIntent(null);
   }
 
+  /**
+   * Creates and returns an Intent that will display a chooser to the user with the specified
+   * title, allowing them to pick an app to call with.
+   *
+   * @param prompt The chooser's title is set by prompt
+   */
   @NonNull
   @CheckResult
   public Intent asChooserIntent(@Nullable CharSequence prompt) {
