@@ -55,4 +55,15 @@ public final class Shelly {
   public static Call call() {
     return new Call();
   }
+
+  /**
+   * Set an alarm
+   *
+   * @return Alarm that can be set to go off at a specific time
+   */
+  @NonNull
+  @CheckResult
+  public static Alarm alarm() {
+    return new Alarm();
+  }
 }
