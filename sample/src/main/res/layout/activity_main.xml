@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,69 +9,105 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/plain_text_share_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Plain Text Share" />
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/plain_text_share_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plain Text Share" />
 
-    <Button
-        android:id="@+id/plain_text_and_url_share_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Plain Text With URL Share" />
+        <Button
+            android:id="@+id/plain_text_and_url_share_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plain Text With URL Share" />
 
-    <Button
-        android:id="@+id/plain_text_and_many_urls_share_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Plain Text With Many URLs Share" />
+        <Button
+            android:id="@+id/plain_text_and_many_urls_share_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plain Text With Many URLs Share" />
 
-    <Button
-        android:id="@+id/image_and_text_share_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Image and Text Share" />
+        <Button
+            android:id="@+id/image_and_text_share_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image and Text Share" />
 
-    <Button
-        android:id="@+id/video_and_text_share_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Video and Text Share" />
+        <Button
+            android:id="@+id/video_and_text_share_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video and Text Share" />
 
-    <Button
-        android:id="@+id/email_to_one_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email One Person" />
+        <Button
+            android:id="@+id/email_to_one_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email One Person" />
 
-    <Button
-        android:id="@+id/email_to_many_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email Many People" />
+        <Button
+            android:id="@+id/email_to_many_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email Many People" />
 
-    <Button
-        android:id="@+id/email_with_cc_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email With CC" />
+        <Button
+            android:id="@+id/email_with_cc_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email With CC" />
 
-    <Button
-        android:id="@+id/email_with_bcc_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email With BCC" />
+        <Button
+            android:id="@+id/email_with_bcc_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email With BCC" />
 
-    <Button
-        android:id="@+id/phone_dial_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phone dial number" />
+        <Button
+            android:id="@+id/phone_dial_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone dial number" />
 
-    <Button
-        android:id="@+id/phone_call_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phone call number" />
-</LinearLayout>
+        <Button
+            android:id="@+id/phone_call_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone call number" />
+
+        <Button
+            android:id="@+id/alarm_empty_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alarm empty intent" />
+
+        <Button
+            android:id="@+id/alarm_set_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alarm set at 10:30" />
+
+        <Button
+            android:id="@+id/alarm_skip_ui_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alarm at 10:30, skip UI" />
+
+        <Button
+            android:id="@+id/alarm_vibrate_only_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alarm only vibrate" />
+
+        <Button
+            android:id="@+id/alarm_custom_ringtone_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alarm custom ringtone - config in source" />
+    </LinearLayout>
+</ScrollView>

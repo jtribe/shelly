@@ -3,7 +3,9 @@ package au.com.jtribe.shelly.sample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 import au.com.jtribe.shelly.Shelly;
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
   private static final int IMAGE_REQUEST_CODE = 123;
@@ -145,6 +148,67 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View v) {
         Intent intent = Shelly.dial().number("555-0101").asChooserIntent();
         startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_empty_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm().asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_set_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm().message("Hello World").hour(10).minute(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_skip_ui_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent =
+            Shelly.alarm().message("Hello World").skipUi(true).hour(10).minute(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_vibrate_only_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm()
+            .message("Hello World")
+            .skipUi(true)
+            .hour(10)
+            .minute(30)
+            .silenceRingTone(true)  //Don't play any sound
+            .vibrate(
+                true)  //Redundant, here as an example. By default vibrate is set to true but this can be used to turn it off
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_custom_ringtone_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        File file = new File(Environment.getExternalStorageDirectory(), "/Alarms/testSong.mp3");
+
+        if (file.exists()) {
+          Uri ringtoneUri = Uri.fromFile(file);
+
+          Intent intent = Shelly.alarm()
+              .message("Hello World")
+              .hour(10)
+              .minute(30)
+              .ringTone(ringtoneUri)
+              .vibrate(false)
+              .asIntent();
+          startActivity(intent);
+        }
       }
     });
   }
