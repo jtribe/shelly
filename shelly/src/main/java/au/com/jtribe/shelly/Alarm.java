@@ -7,6 +7,9 @@ import android.provider.AlarmClock;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
@@ -21,13 +24,15 @@ public final class Alarm {
   private Integer minute;
 
   //TODO:
-  //private List<int> daysToRepeat;
+  private ArrayList<Integer> daysToRepeat;
   private Uri ringTone;
   private Boolean vibrate;
   private Boolean silenceRingTone;
   private Boolean skipUi;
 
-  Alarm() {}
+  Alarm() {
+    this.daysToRepeat = new ArrayList<>(7);
+  }
 
   @NonNull
   @CheckResult
@@ -91,6 +96,15 @@ public final class Alarm {
     return this;
   }
 
+  @NonNull
+  @CheckResult
+  public Alarm daysToRepeat(@NonNull Integer... days) {
+    checkNotNull(days, "days == null");
+    this.daysToRepeat.addAll(Arrays.asList(days));
+    return this;
+  }
+
+
 
 
   /**
@@ -117,6 +131,8 @@ public final class Alarm {
         alarmClockIntent.putExtra(AlarmClock.EXTRA_RINGTONE, AlarmClock.VALUE_RINGTONE_SILENT);
     if ( this.vibrate != null)
       alarmClockIntent.putExtra(AlarmClock.EXTRA_VIBRATE, this.vibrate);
+    if ( !this.daysToRepeat.isEmpty() )
+      alarmClockIntent.putIntegerArrayListExtra(AlarmClock.EXTRA_DAYS, this.daysToRepeat);
 
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 import au.com.jtribe.shelly.Shelly;
 import java.io.File;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
   private static final int IMAGE_REQUEST_CODE = 123;
@@ -211,6 +212,19 @@ public class MainActivity extends AppCompatActivity {
         }
       }
     });
+
+    findViewById(R.id.alarm_repeating_weekdays_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent =
+            Shelly.alarm().message("Hello World").hour(10).minute(30)
+                .daysToRepeat(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY)
+                .asIntent();
+        startActivity(intent);
+      }
+    });
+
+
   }
 
   @RequiresPermission(Manifest.permission.CALL_PHONE)
