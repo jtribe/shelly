@@ -224,6 +224,34 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    findViewById(R.id.timer_10sec_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World").seconds(10).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.timer_mix_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World")
+            .hours(1).minutes(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.timer_1min_noUi_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World")
+            .minutes(1).skipUi(true).asIntent();
+        startActivity(intent);
+      }
+    });
+
+
+
 
   }
 

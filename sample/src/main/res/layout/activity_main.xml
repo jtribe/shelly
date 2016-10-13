@@ -115,5 +115,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Alarm repeat on weekdays" />
+
+        <Button
+            android:id="@+id/timer_10sec_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timer for 10 seconds" />
+
+        <Button
+            android:id="@+id/timer_mix_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timer for 1 hour, 30 minutes" />
+
+        <Button
+            android:id="@+id/timer_1min_noUi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timer for 1 minutes, skip UI" />
     </LinearLayout>
 </ScrollView>
