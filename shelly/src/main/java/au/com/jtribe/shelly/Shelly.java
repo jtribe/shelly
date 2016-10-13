@@ -66,4 +66,15 @@ public final class Shelly {
   public static Alarm alarm() {
     return new Alarm();
   }
+
+  /**
+   * Set an timer
+   *
+   * @return Timer that can be set to go off after a specific duration
+   */
+  @NonNull
+  @CheckResult
+  public static Timer timer() {
+    return new Timer();
+  }
 }

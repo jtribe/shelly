@@ -108,7 +108,7 @@ public final class Alarm {
 
 
   /**
-   * Creates and returns an Intent that will dial the number provided.
+   * Creates and returns an Intent that will create and configure an alarm with the values provided.
    */
   @NonNull
   @CheckResult
