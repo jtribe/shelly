@@ -77,4 +77,15 @@ public final class Shelly {
   public static Timer timer() {
     return new Timer();
   }
+
+  /**
+   * Set a Calendar event
+   *
+   * @return Calendar - TODO
+   */
+  @NonNull
+  @CheckResult
+  public static Calendar calendar() {
+    return new Calendar();
+  }
 }
