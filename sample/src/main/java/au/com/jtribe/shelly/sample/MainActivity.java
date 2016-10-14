@@ -15,6 +15,8 @@ import android.widget.Toast;
 import au.com.jtribe.shelly.Shelly;
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
   private static final int IMAGE_REQUEST_CODE = 123;
@@ -250,8 +252,39 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    findViewById(R.id.calendar_allDay_tomorrow_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(new Date());
+        Intent intent = Shelly.calendar()
+            .isAllDayEvent(true)
+            .eventTitle("Eat Cake")
+            .eventStartTime(cal)
+            .asIntent();
+        startActivity(intent);
+      }
+    });
 
+    findViewById(R.id.calendar_2hour_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Calendar calStart = new GregorianCalendar();
+        calStart.setTime(new Date());
+        Calendar calEnd = new GregorianCalendar();
+        calEnd.setTime(new Date(System.currentTimeMillis() + 7200000)); //7200000 = number of milliseconds in 1 day
 
+        Intent intent = Shelly.calendar()
+            .eventTitle("Eat Cake")
+            .eventStartTime(calStart)
+            .eventEndTime(calEnd)
+            .eventLocation("Melbourne Cricket Ground")
+            .eventDescription("I hope the cake isn't a lie")
+            .attendeeEmails("shelly@shelly.com", "smelly@shelly.com")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
 
   }
 

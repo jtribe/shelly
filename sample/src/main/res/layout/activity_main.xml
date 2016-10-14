@@ -133,5 +133,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Timer for 1 minutes, skip UI" />
+
+        <Button
+            android:id="@+id/calendar_allDay_tomorrow_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calendar all day tomorrow" />
+
+        <Button
+            android:id="@+id/calendar_2hour_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calendar meeting with attendees" />
     </LinearLayout>
 </ScrollView>
