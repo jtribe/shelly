@@ -1,7 +1,6 @@
 package au.com.jtribe.shelly;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.provider.CalendarContract;
 import android.support.annotation.CheckResult;
@@ -103,9 +102,9 @@ public final class Calendar {
   @CheckResult
   public Intent asIntent() {
     Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
-    //Intent calendarIntent = new Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI);
+    //Don't need both, one or the other seem to achieve the same thing, maybe api < 14 need the setType
     calendarIntent.setData(CalendarContract.Events.CONTENT_URI);
-    calendarIntent.setType("vnd.android.cursor.dir/event"); //Do i need this?
+    calendarIntent.setType("vnd.android.cursor.dir/event");
 
     if ( this.eventTitle != null)
       calendarIntent.putExtra(CalendarContract.Events.TITLE, this.eventTitle);
@@ -123,15 +122,6 @@ public final class Calendar {
       String[] emailsArray = new String[this.attendeeEmails.size()];
       calendarIntent.putExtra(Intent.EXTRA_EMAIL, this.attendeeEmails.toArray(emailsArray));
     }
-    //Tried a bunch of variations, none seem to work.
-    calendarIntent.putExtra(CalendarContract.Events.DISPLAY_COLOR, Color.MAGENTA);
-    calendarIntent.putExtra(CalendarContract.Events.EVENT_COLOR, Color.MAGENTA);
-    calendarIntent.putExtra(CalendarContract.Events.CALENDAR_COLOR, Color.MAGENTA);
-    calendarIntent.putExtra(CalendarContract.Events.CALENDAR_COLOR_KEY, Color.MAGENTA);
-    calendarIntent.putExtra(CalendarContract.Events.EVENT_COLOR_KEY, Color.MAGENTA);
-
-
-
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       calendarIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);

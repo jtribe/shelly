@@ -145,5 +145,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Calendar meeting with attendees" />
+
+        <Button
+            android:id="@+id/map_latlong_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map latitude longitude" />
+
+        <Button
+            android:id="@+id/map_address_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map address" />
     </LinearLayout>
 </ScrollView>

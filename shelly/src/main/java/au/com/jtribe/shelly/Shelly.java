@@ -88,4 +88,11 @@ public final class Shelly {
   public static Calendar calendar() {
     return new Calendar();
   }
+
+  @NonNull
+  @CheckResult
+  public static Map map() {
+    return new Map();
+  }
+
 }

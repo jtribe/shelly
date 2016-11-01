@@ -286,6 +286,30 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    findViewById(R.id.map_latlong_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .latitude(-37.813)
+            .longitude(144.963)
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.map_address_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .address("John Street Hawthorn")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+
+
+
   }
 
   @RequiresPermission(Manifest.permission.CALL_PHONE)
