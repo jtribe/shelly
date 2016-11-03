@@ -18,12 +18,12 @@ public final class Map {
   //Either use lat long or address to open a map
   private Double latitude;
   private Double longitude;
-
+  //Can be an address OR a search query if latlong is used e.g "Restaurant"
   private String address;
 
   //Optionals:
   private Integer zoom;
-  private String label;
+  //private String label;
 
   Map() {
   }
@@ -44,10 +44,17 @@ public final class Map {
     return this;
   }
 
+  //Zoom parameter accepts values between 1-23
   @NonNull
   @CheckResult
   public Map zoom(@NonNull Integer zoom) {
     checkNotNull(zoom, "zoom == null");
+    if (zoom < 1) {
+      zoom = 1;
+    }
+    if (zoom > 23) {
+      zoom = 23;
+    }
     this.zoom = zoom;
     return this;
   }
@@ -76,7 +83,6 @@ public final class Map {
   @CheckResult
   public Intent asIntent() {
 
-
     //Main string
     String dataScheme = "geo:";
 
@@ -84,7 +90,7 @@ public final class Map {
     String latLongScheme = "0,0";
     //Build the data URI string
     if (this.longitude != null && this.latitude != null) {
-      latLongScheme = String.format("%s,%s", this.latitude.toString(),this.longitude.toString());
+      latLongScheme = String.format("%s,%s", this.latitude.toString(), this.longitude.toString());
       //dataScheme = dataScheme.concat(String.format("%s,%s", this.latitude.toString(), this.longitude.toString()));
     }
     dataScheme = dataScheme.concat(latLongScheme);
@@ -97,13 +103,10 @@ public final class Map {
     }
 
     if (this.zoom != null) {
-
-    }
-    if (this.label != null) {
-
+      dataScheme = dataScheme.concat(String.format("?z=%s", zoom.toString()));
     }
 
-    Log.d("map URI",Uri.parse(dataScheme).toString());
+    Log.d("map URI", Uri.parse(dataScheme).toString());
     Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dataScheme));
     return mapIntent;
   }

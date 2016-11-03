@@ -157,5 +157,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Map address" />
+
+        <Button
+            android:id="@+id/map_latlong_query_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map location and query" />
     </LinearLayout>
 </ScrollView>

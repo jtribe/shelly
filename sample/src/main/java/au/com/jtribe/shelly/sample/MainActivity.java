@@ -292,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = Shelly.map()
             .latitude(-37.813)
             .longitude(144.963)
+            .zoom(17)
             .asIntent();
         startActivity(intent);
       }
@@ -302,6 +303,18 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View v) {
         Intent intent = Shelly.map()
             .address("John Street Hawthorn")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.map_latlong_query_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .latitude(-37.813)
+            .longitude(144.963)
+            .address("Cinema")
             .asIntent();
         startActivity(intent);
       }
