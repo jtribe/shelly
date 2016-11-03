@@ -61,14 +61,6 @@ public final class Map {
 
   @NonNull
   @CheckResult
-  public Map label(@NonNull String label) {
-    checkNotNull(label, "label == null");
-    this.label = label;
-    return this;
-  }
-
-  @NonNull
-  @CheckResult
   public Map address(@NonNull String address) {
     checkNotNull(address, "address == null");
     this.address = address;
