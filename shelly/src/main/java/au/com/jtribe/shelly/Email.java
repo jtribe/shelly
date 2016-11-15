@@ -77,7 +77,7 @@ public final class Email {
   }
 
   /**
-   * Adds subject to the email.
+   * Adds a subject to the email.
    *
    * @param subject Subject of the email
    * @return Object this method was called on for method chaining.

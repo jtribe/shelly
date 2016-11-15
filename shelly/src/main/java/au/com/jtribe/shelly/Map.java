@@ -19,8 +19,8 @@ public final class Map {
   private Double longitude;
   private String address;
 
-  //Optionals:
   private Integer zoom;
+  //Would be good to implement this at some point
   //private String label;
 
   Map() {
@@ -28,6 +28,7 @@ public final class Map {
 
   /**
    * Adds a latitude to the Map
+   * Expects a value between 180 and -180.
    *
    * @param latitude The latitude coordinate for the Map
    * @return Object this method was called on for method chaining.
@@ -42,6 +43,7 @@ public final class Map {
 
   /**
    * Adds a longitude to the Map
+   * Expects a value between 180 and -180.
    *
    * @param longitude the longitude coordinate for the Map
    * @return Object this method was called on for method chaining.
@@ -81,7 +83,7 @@ public final class Map {
    * Adds an address or search term to the Map.
    * May be a specific address or a search term such as "Restaurant"
    *
-   * @param address the address for the Map
+   * @param address the address or search term for the Map
    * @return Object this method was called on for method chaining.
    */
   @NonNull

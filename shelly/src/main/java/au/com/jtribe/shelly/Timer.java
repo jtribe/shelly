@@ -25,7 +25,7 @@ public final class Timer {
   }
 
   /**
-   * Adds a the specified amount of hours to the duration of the Timer
+   * Adds the specified amount of hours to the duration of the Timer
    *
    * @param hours amount of hours the Timer should go for
    * @return Object this method was called on for method chaining.
@@ -39,7 +39,7 @@ public final class Timer {
   }
 
   /**
-   * Adds a the specified amount of minutes to the duration of the Timer
+   * Adds the specified amount of minutes to the duration of the Timer
    *
    * @param minutes amount of minutes the Timer should go for
    * @return Object this method was called on for method chaining.
@@ -53,7 +53,7 @@ public final class Timer {
   }
 
   /**
-   * Adds a the specified amount of seconds to the duration of the Timer
+   * Adds the specified amount of seconds to the duration of the Timer
    *
    * @param seconds amount of seconds the Timer should go for
    * @return Object this method was called on for method chaining.
@@ -68,8 +68,8 @@ public final class Timer {
 
   /**
    * Adds a flag to skip the Timer activity UI.
-   * If true the Timer will be set automatically
-   * If false the user will need to accept the Timer before it is set
+   * If true this Timer will be set automatically without leaving the current activity
+   * If false this Timer will be opened in a new Activity where the user needs to set the timer
    *
    * @param skipUi The flag used to skip the Timer activity UI
    * @return Object this method was called on for method chaining.

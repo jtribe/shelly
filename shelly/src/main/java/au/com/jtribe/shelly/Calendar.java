@@ -17,7 +17,7 @@ import static au.com.jtribe.shelly.Preconditions.checkNotNull;
  */
 public final class Calendar {
 
-  //Time = ms since epoch
+  //times are based on ms since epoch
   private Long eventStartTime;
   private Long eventEndTime;
 
@@ -61,6 +61,7 @@ public final class Calendar {
 
   /**
    * Adds a location to the Calendar event. Can be a formal street address or any other string
+   * Some Calendar apps will include a map of the eventLocation
    *
    * @param eventLocation The location of the Calendar event.
    * @return Object this method was called on for method chaining.
@@ -91,7 +92,7 @@ public final class Calendar {
 
   /**
    * Adds an end time to the Calendar event.
-   * Takes in a java.util.Calendar object but stores the start time as a long (time since epoch)
+   * Takes in a java.util.Calendar object but stores the end time as a long (time since epoch)
    *
    * @param calendar a Java.util.Calendar representing the end time of the Calendar event
    * @return Object this method was called on for method chaining.
@@ -105,7 +106,7 @@ public final class Calendar {
   }
 
   /**
-   * Adds a flag to turn the event into an all day event.
+   * Adds a flag to turn the Calendar event into an all day event.
    *
    * @param isAllDayEvent determines whether the Calendar event is an all day event
    * @return Object this method was called on for method chaining.
@@ -119,7 +120,7 @@ public final class Calendar {
   }
 
   /**
-   * Adds email addresses that this Calendar event should be sent to.
+   * Adds email addresses that this Calendar event invitation should be sent to.
    *
    * @param attendeeEmails Email addresses to invite people to this Calendar event.
    * @return Object this method was called on for method chaining.
