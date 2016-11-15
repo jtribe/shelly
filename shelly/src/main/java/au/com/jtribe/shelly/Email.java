@@ -47,10 +47,10 @@ public final class Email {
   }
 
   /**
-   * Adds email addresses that the email should be sent to. Email addresses will be added to the CC
+   * Adds email addresses that the email should be cc'd to. Email addresses will be added to the CC
    * field.
    *
-   * @param cc Urls that the email should be cced to.
+   * @param cc Urls that the email should be cc'd to.
    * @return Object this method was called on for method chaining.
    */
   @NonNull
@@ -62,10 +62,10 @@ public final class Email {
   }
 
   /**
-   * Adds email addresses that the email should be sent to. Email addresses will be added to the
+   * Adds email addresses that the email should be bcc'd to. Email addresses will be added to the
    * bcc field.
    *
-   * @param bcc Urls that the email should be bcced to.
+   * @param bcc Urls that the email should be bcc'd to.
    * @return Object this method was called on for method chaining.
    */
   @NonNull

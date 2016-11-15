@@ -10,15 +10,13 @@ import android.util.Log;
 import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
 /**
- * Created by Mitch on 15/10/2016.
+ * Represents a Map which can be set to a specific address or coordinate (lat, long)
  */
-
 public final class Map {
 
-  //Either use lat long or address to open a map
+  //Can use either lat/long combination or address
   private Double latitude;
   private Double longitude;
-  //Can be an address OR a search query if latlong is used e.g "Restaurant"
   private String address;
 
   //Optionals:
@@ -28,6 +26,12 @@ public final class Map {
   Map() {
   }
 
+  /**
+   * Adds a latitude to the Map
+   *
+   * @param latitude The latitude coordinate for the Map
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Map latitude(@NonNull Double latitude) {
@@ -36,6 +40,12 @@ public final class Map {
     return this;
   }
 
+  /**
+   * Adds a longitude to the Map
+   *
+   * @param longitude the longitude coordinate for the Map
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Map longitude(@NonNull Double longitude) {
@@ -45,6 +55,14 @@ public final class Map {
   }
 
   //Zoom parameter accepts values between 1-23
+
+  /**
+   * Adds a zoom parameter to the Map, higher values increase the zoom magnification.
+   * Appropriate zoom values are between 1 and 23
+   *
+   * @param zoom the zoom parameter for the Map.
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Map zoom(@NonNull Integer zoom) {
@@ -59,6 +77,13 @@ public final class Map {
     return this;
   }
 
+  /**
+   * Adds an address or search term to the Map.
+   * May be a specific address or a search term such as "Restaurant"
+   *
+   * @param address the address for the Map
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Map address(@NonNull String address) {

@@ -10,11 +10,8 @@ import android.support.annotation.Nullable;
 import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
 /**
- * Created by mathias on 12/10/2016.
+ * Represents a Timer that will go off after the set duration
  */
-
-//Timers through intents are set by number of seconds. Users won't want to set a timer for 3600 seconds
-  //Instead users should be able to set a timer for 1 hour.
 public final class Timer {
 
   private Integer hours;
@@ -24,8 +21,15 @@ public final class Timer {
 
   private Boolean skipUi;
 
-  Timer() {}
+  Timer() {
+  }
 
+  /**
+   * Adds a the specified amount of hours to the duration of the Timer
+   *
+   * @param hours amount of hours the Timer should go for
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Timer hours(@NonNull Integer hours) {
@@ -34,6 +38,12 @@ public final class Timer {
     return this;
   }
 
+  /**
+   * Adds a the specified amount of minutes to the duration of the Timer
+   *
+   * @param minutes amount of minutes the Timer should go for
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Timer minutes(@NonNull Integer minutes) {
@@ -42,6 +52,12 @@ public final class Timer {
     return this;
   }
 
+  /**
+   * Adds a the specified amount of seconds to the duration of the Timer
+   *
+   * @param seconds amount of seconds the Timer should go for
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Timer seconds(@NonNull Integer seconds) {
@@ -50,7 +66,14 @@ public final class Timer {
     return this;
   }
 
-  //When true the UI of timer is never shown, the timer is still set but the timer activity doesnt open
+  /**
+   * Adds a flag to skip the Timer activity UI.
+   * If true the Timer will be set automatically
+   * If false the user will need to accept the Timer before it is set
+   *
+   * @param skipUi The flag used to skip the Timer activity UI
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Timer skipUi(@NonNull Boolean skipUi) {
@@ -59,6 +82,12 @@ public final class Timer {
     return this;
   }
 
+  /**
+   * Adds a message to the timer which is displayed when the Timer expires
+   *
+   * @param message The message to add to the Timer
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Timer message(@NonNull String message) {
@@ -68,7 +97,8 @@ public final class Timer {
   }
 
   /**
-   * Creates and returns an Intent that will create and configure an alarm with the values provided.
+   * Creates and returns an Intent that will create and configure an alarm with the values
+   * provided.
    */
   @NonNull
   @CheckResult
@@ -77,21 +107,25 @@ public final class Timer {
 
     //get total amount of seconds
     int totalSeconds = 0;
-    if ( seconds != null)
+    if (seconds != null) {
       totalSeconds += seconds;
-    if ( minutes != null)
-      totalSeconds += ( minutes * 60);
-    if ( hours != null)
+    }
+    if (minutes != null) {
+      totalSeconds += (minutes * 60);
+    }
+    if (hours != null) {
       totalSeconds += (hours * 60 * 60);
-    if (totalSeconds > 0)
+    }
+    if (totalSeconds > 0) {
       timerIntent.putExtra(AlarmClock.EXTRA_LENGTH, totalSeconds);
+    }
 
-    if ( this.message != null)
+    if (this.message != null) {
       timerIntent.putExtra(AlarmClock.EXTRA_MESSAGE, this.message);
-    if ( this.skipUi != null)
+    }
+    if (this.skipUi != null) {
       timerIntent.putExtra(AlarmClock.EXTRA_SKIP_UI, this.skipUi);
-
-
+    }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       timerIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);

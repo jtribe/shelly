@@ -9,21 +9,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
 /**
- * Created by mathias on 12/10/2016.
+ * Represents an alarm set for a specific time
+ * TODO: Validate hour/minute, validate and notify user if they enter hour/minute out side of range
  */
-
 public final class Alarm {
 
   private String message;
   private Integer hour;
   private Integer minute;
 
-  //TODO:
   private ArrayList<Integer> daysToRepeat;
   private Uri ringTone;
   private Boolean vibrate;
@@ -42,9 +40,12 @@ public final class Alarm {
     return this;
   }
 
-
-  //Regarding validation: The intent will accept hours and minutes outside of their natural range
-  //However it will just require the user to set the time of the alarm if they provide invalid hours/minutes in the intent
+  /**
+   * Adds the hour that the alarm should be set to. Should be a value between 0-23
+   *
+   * @param hour hour of the day to set the alarm to
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm hour(@NonNull Integer hour) {
@@ -54,6 +55,12 @@ public final class Alarm {
     return this;
   }
 
+  /**
+   * Adds the minute that the alarm should be set to. Should be a value between 0-59
+   *
+   * @param minute minute of the day to set the alarm to
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm minute(@NonNull Integer minute) {
@@ -63,7 +70,13 @@ public final class Alarm {
     return this;
   }
 
-  //When true the UI of clock/alarm is never shown, the alarm is still set but the alarm activity doesnt open
+  /**
+   * SkipUI allows an alarm to be set without opening the Alarm activity.
+   * If this is not set or is set to false the Alarm activity will be opened
+   *
+   * @param skipUi when true the alarm Activity won't be opened.
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm skipUi(@NonNull Boolean skipUi) {
@@ -72,6 +85,13 @@ public final class Alarm {
     return this;
   }
 
+  /**
+   * Set custom ringTone for the alarm
+   * See MainActivity examples
+   *
+   * @param ringTone URI to the ringTone to play when the alarm goes off
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm ringTone(@NonNull Uri ringTone) {
@@ -80,6 +100,11 @@ public final class Alarm {
     return this;
   }
 
+  /**
+   * Option to silence the ringTone turning the alarm into a vibrate only alarm
+   *
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm silenceRingTone(@NonNull Boolean silenceRingTone) {
@@ -88,6 +113,11 @@ public final class Alarm {
     return this;
   }
 
+  /**
+   * Option to enable vibrate on the alarms, by default alarms vibrate
+   *
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm vibrate(@NonNull Boolean vibrate) {
@@ -96,6 +126,12 @@ public final class Alarm {
     return this;
   }
 
+  /**
+   * Used to created a repeating alarm, repeat on these days of the week.
+   *
+   * @param days Accepts days as Integers, use Calendar.MONDAY to do this
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Alarm daysToRepeat(@NonNull Integer... days) {
@@ -104,36 +140,44 @@ public final class Alarm {
     return this;
   }
 
-
-
-
   /**
-   * Creates and returns an Intent that will create and configure an alarm with the values provided.
+   * Creates and returns an Intent that will create and configure an alarm with the values
+   * provided.
    */
   @NonNull
   @CheckResult
   public Intent asIntent() {
     Intent alarmClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
 
-    if ( this.message != null)
+    if (this.message != null) {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_MESSAGE, this.message);
-    if ( this.hour != null)  //Should i validate here also thats its between 0-24?
+    }
+    if (this.hour != null)  //Should i validate here also thats its between 0-24?
+    {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_HOUR, this.hour);
-    if ( this.minute != null)  //Should i validate here also thats its between 0-60?
+    }
+    if (this.minute != null)  //Should i validate here also thats its between 0-60?
+    {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_MINUTES, this.minute);
-    if ( this.skipUi != null)
+    }
+    if (this.skipUi != null) {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_SKIP_UI, this.skipUi);
-    if ( this.ringTone != null)
+    }
+    if (this.ringTone != null) {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_RINGTONE, this.ringTone.toString());
+    }
     //if silenceRingTone is set override any set ringtones
-    if ( this.silenceRingTone != null)
-      if ( this.silenceRingTone)
+    if (this.silenceRingTone != null) {
+      if (this.silenceRingTone) {
         alarmClockIntent.putExtra(AlarmClock.EXTRA_RINGTONE, AlarmClock.VALUE_RINGTONE_SILENT);
-    if ( this.vibrate != null)
+      }
+    }
+    if (this.vibrate != null) {
       alarmClockIntent.putExtra(AlarmClock.EXTRA_VIBRATE, this.vibrate);
-    if ( !this.daysToRepeat.isEmpty() )
+    }
+    if (!this.daysToRepeat.isEmpty()) {
       alarmClockIntent.putIntegerArrayListExtra(AlarmClock.EXTRA_DAYS, this.daysToRepeat);
-
+    }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       alarmClockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);

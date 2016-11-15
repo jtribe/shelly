@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar calStart = new GregorianCalendar();
         calStart.setTime(new Date());
         Calendar calEnd = new GregorianCalendar();
-        calEnd.setTime(new Date(System.currentTimeMillis() + 7200000)); //7200000 = number of milliseconds in 1 day
+        calEnd.setTime(new Date(System.currentTimeMillis() + 7200000)); //7200000 = number of milliseconds in 2 hours
 
         Intent intent = Shelly.calendar()
             .eventTitle("Eat Cake")

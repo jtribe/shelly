@@ -13,28 +13,30 @@ import java.util.List;
 import static au.com.jtribe.shelly.Preconditions.checkNotNull;
 
 /**
- * Created by mathias on 13/10/2016.
+ * Represents a Calendar event
  */
-
 public final class Calendar {
 
-  private String eventTitle;
-
   //Time = ms since epoch
-  //Need a smart API for this so they don't need to enter in time as longs.
   private Long eventStartTime;
   private Long eventEndTime;
 
+  private String eventTitle;
   private String eventDescription;
   private String eventLocation;
   private final List<String> attendeeEmails;
   private Boolean isAllDayEvent;
 
-
   Calendar() {
     attendeeEmails = new ArrayList<>();
   }
 
+  /**
+   * Adds a title to the Calendar event
+   *
+   * @param eventTitle The title of the Calendar event
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar eventTitle(@NonNull String eventTitle) {
@@ -43,6 +45,12 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds a description to the Calendar event
+   *
+   * @param eventDescription The description of the Calendar event
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar eventDescription(@NonNull String eventDescription) {
@@ -51,6 +59,12 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds a location to the Calendar event. Can be a formal street address or any other string
+   *
+   * @param eventLocation The location of the Calendar event.
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar eventLocation(@NonNull String eventLocation) {
@@ -59,6 +73,14 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds a start time to the Calendar event.
+   * Takes in a java.util.Calendar object but stores the start time as a long (time since epoch)
+   *
+   * @param calendar A java.util.Calendar object representing the start time and date of the
+   * Calendar event
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar eventStartTime(@NonNull java.util.Calendar calendar) {
@@ -67,6 +89,13 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds an end time to the Calendar event.
+   * Takes in a java.util.Calendar object but stores the start time as a long (time since epoch)
+   *
+   * @param calendar a Java.util.Calendar representing the end time of the Calendar event
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar eventEndTime(@NonNull java.util.Calendar calendar) {
@@ -75,6 +104,12 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds a flag to turn the event into an all day event.
+   *
+   * @param isAllDayEvent determines whether the Calendar event is an all day event
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar isAllDayEvent(@NonNull Boolean isAllDayEvent) {
@@ -83,6 +118,12 @@ public final class Calendar {
     return this;
   }
 
+  /**
+   * Adds email addresses that this Calendar event should be sent to.
+   *
+   * @param attendeeEmails Email addresses to invite people to this Calendar event.
+   * @return Object this method was called on for method chaining.
+   */
   @NonNull
   @CheckResult
   public Calendar attendeeEmails(@NonNull String... attendeeEmails) {
@@ -90,9 +131,6 @@ public final class Calendar {
     this.attendeeEmails.addAll(Arrays.asList(attendeeEmails));
     return this;
   }
-
-
-
 
   /**
    * Creates and returns an Intent that will create and configure an alarm with the values
@@ -106,19 +144,25 @@ public final class Calendar {
     calendarIntent.setData(CalendarContract.Events.CONTENT_URI);
     calendarIntent.setType("vnd.android.cursor.dir/event");
 
-    if ( this.eventTitle != null)
+    if (this.eventTitle != null) {
       calendarIntent.putExtra(CalendarContract.Events.TITLE, this.eventTitle);
-    if ( this.eventDescription != null)
+    }
+    if (this.eventDescription != null) {
       calendarIntent.putExtra(CalendarContract.Events.DESCRIPTION, this.eventDescription);
-    if ( this.eventLocation != null)
+    }
+    if (this.eventLocation != null) {
       calendarIntent.putExtra(CalendarContract.Events.EVENT_LOCATION, this.eventLocation);
-    if ( this.eventStartTime != null)
+    }
+    if (this.eventStartTime != null) {
       calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, this.eventStartTime);
-    if ( this.eventEndTime != null)
+    }
+    if (this.eventEndTime != null) {
       calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, this.eventEndTime);
-    if (this.isAllDayEvent != null)
+    }
+    if (this.isAllDayEvent != null) {
       calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, this.isAllDayEvent);
-    if ( !this.attendeeEmails.isEmpty()) {
+    }
+    if (!this.attendeeEmails.isEmpty()) {
       String[] emailsArray = new String[this.attendeeEmails.size()];
       calendarIntent.putExtra(Intent.EXTRA_EMAIL, this.attendeeEmails.toArray(emailsArray));
     }
