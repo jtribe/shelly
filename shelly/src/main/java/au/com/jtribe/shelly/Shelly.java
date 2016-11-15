@@ -4,7 +4,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
- * Shelly is a factory that creates instances of SocialShare's
+ * Shelly is a factory that builds objects that are used to simplify intents.
  */
 public final class Shelly {
 
@@ -55,4 +55,49 @@ public final class Shelly {
   public static Call call() {
     return new Call();
   }
+
+  /**
+   * Set an alarm
+   *
+   * @return Alarm that can be set to go off at a specific time
+   */
+  @NonNull
+  @CheckResult
+  public static Alarm alarm() {
+    return new Alarm();
+  }
+
+  /**
+   * Set a timer
+   *
+   * @return Timer that can be set to go off after a specific duration
+   */
+  @NonNull
+  @CheckResult
+  public static Timer timer() {
+    return new Timer();
+  }
+
+  /**
+   * Create a Calendar event
+   *
+   * @return Calendar that can have a start time, end time, attendees, location and title
+   */
+  @NonNull
+  @CheckResult
+  public static Calendar calendar() {
+    return new Calendar();
+  }
+
+  /**
+   * Create a Map intent
+   *
+   * @return Map intent at a specific address or latitude longitude
+   */
+  @NonNull
+  @CheckResult
+  public static Map map() {
+    return new Map();
+  }
+
 }

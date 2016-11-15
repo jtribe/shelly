@@ -3,7 +3,9 @@ package au.com.jtribe.shelly.sample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
@@ -11,6 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 import au.com.jtribe.shelly.Shelly;
+import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
   private static final int IMAGE_REQUEST_CODE = 123;
@@ -147,6 +153,176 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
+    findViewById(R.id.alarm_empty_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm().asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_set_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm().message("Hello World").hour(10).minute(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_skip_ui_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent =
+            Shelly.alarm().message("Hello World").skipUi(true).hour(10).minute(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_vibrate_only_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.alarm()
+            .message("Hello World")
+            .skipUi(true)
+            .hour(10)
+            .minute(30)
+            .silenceRingTone(true)  //Don't play any sound
+            .vibrate(
+                true)  //Redundant, here as an example. By default vibrate is set to true but this can be used to turn it off
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.alarm_custom_ringtone_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        File file = new File(Environment.getExternalStorageDirectory(), "/Alarms/testSong.mp3");
+
+        if (file.exists()) {
+          Uri ringtoneUri = Uri.fromFile(file);
+
+          Intent intent = Shelly.alarm()
+              .message("Hello World")
+              .hour(10)
+              .minute(30)
+              .ringTone(ringtoneUri)
+              .vibrate(false)
+              .asIntent();
+          startActivity(intent);
+        }
+      }
+    });
+
+    findViewById(R.id.alarm_repeating_weekdays_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent =
+            Shelly.alarm().message("Hello World").hour(10).minute(30)
+                .daysToRepeat(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY)
+                .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.timer_10sec_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World").seconds(10).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.timer_mix_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World")
+            .hours(1).minutes(30).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.timer_1min_noUi_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.timer().message("Hello World")
+            .minutes(1).skipUi(true).asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.calendar_allDay_tomorrow_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(new Date());
+        Intent intent = Shelly.calendar()
+            .isAllDayEvent(true)
+            .eventTitle("Eat Cake")
+            .eventStartTime(cal)
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.calendar_2hour_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Calendar calStart = new GregorianCalendar();
+        calStart.setTime(new Date());
+        Calendar calEnd = new GregorianCalendar();
+        calEnd.setTime(new Date(System.currentTimeMillis() + 7200000)); //7200000 = number of milliseconds in 2 hours
+
+        Intent intent = Shelly.calendar()
+            .eventTitle("Eat Cake")
+            .eventStartTime(calStart)
+            .eventEndTime(calEnd)
+            .eventLocation("Melbourne Cricket Ground")
+            .eventDescription("I hope the cake isn't a lie")
+            .attendeeEmails("shelly@shelly.com", "smelly@shelly.com")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.map_latlong_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .latitude(-37.813)
+            .longitude(144.963)
+            .zoom(17)
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.map_address_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .address("John Street Hawthorn")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+    findViewById(R.id.map_latlong_query_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = Shelly.map()
+            .latitude(-37.813)
+            .longitude(144.963)
+            .address("Cinema")
+            .asIntent();
+        startActivity(intent);
+      }
+    });
+
+
+
+
   }
 
   @RequiresPermission(Manifest.permission.CALL_PHONE)
