@@ -21,7 +21,8 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile 'org.robolectric:robolectric:2.4'
+    testCompile 'org.robolectric:robolectric:3.1.2'
+    compile 'com.android.support:support-annotations:24.2.1'
 }
 
 apply plugin: 'com.github.dcendents.android-maven'
@@ -36,7 +37,7 @@ version = '0.1.6'
 
 bintray {
     Properties properties = new Properties()
-    properties.load(project.rootProject.file('bintray.properties').newDataInputStream())
+    //properties.load(project.rootProject.file('bintray.properties').newDataInputStream())
 
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
